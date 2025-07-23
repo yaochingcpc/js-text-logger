@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>文字紀錄測試</title>
+</head>
+<body>
+  <h1>輸入文字紀錄</h1>
+  <textarea id="inputText" rows="5" cols="40"></textarea><br />
+  <button onclick="submitText()">送出</button>
+
+  <script>
+    async function submitText() {
+      const text = document.getElementById("inputText").value;
+      const res = await fetch('/api/log', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      });
+      const result = await res.text();
+      alert("伺服器回應: " + result);
+    }
+  </script>
+</body>
+</html>
